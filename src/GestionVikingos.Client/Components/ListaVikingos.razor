@@ -1,0 +1,37 @@
+<div class="row">
+    @foreach (var vikingo in Vikingos)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@vikingo.Nombre</h5>
+                    <p class="card-text">
+                        <strong>Batallas Ganadas:</strong> @vikingo.BatallasGanadas<br />
+                        <strong>Arma Favorita:</strong> @vikingo.ArmaFavorita<br />
+                        <strong>Nivel de Honor:</strong> @vikingo.NivelHonor<br />
+                        <strong>Causa de Muerte:</strong> @vikingo.CausaMuerteGloriosa<br />
+                        <strong>Valhalla Points:</strong> @vikingo.ValhallaPoints<br />
+                        <strong>Tipo de Guerrero:</strong> @vikingo.TipoGuerrero
+                    </p>
+                    @if (vikingo.ValhallaPoints >= 600)
+                    {
+                        <p class="text-success fw-bold">¡Listo para el banquete en Valhalla!</p>
+                    }
+                    <button class="btn btn-warning me-3" @onclick="() => OnEdit.InvokeAsync(vikingo)">Editar</button>
+                    <button class="btn btn-danger" @onclick="() => OnDelete.InvokeAsync(vikingo.Id)">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public IReadOnlyList<Vikingo> Vikingos { get; set; }
+
+    [Parameter]
+    public EventCallback<Vikingo> OnEdit { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnDelete { get; set; }
+} 

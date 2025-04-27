@@ -1,0 +1,59 @@
+<div class="modal fade show" style="display: block;" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@(Vikingo.Id == 0 ? "Nuevo Vikingo" : "Editar Vikingo")</h5>
+                <button type="button" class="btn-close" @onclick="OnCancel"></button>
+            </div>
+            <div class="modal-body">
+                <EditForm Model="@Vikingo" OnValidSubmit="@(() => OnSave.InvokeAsync(Vikingo))">
+                    <DataAnnotationsValidator />
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <InputText @bind-Value="Vikingo.Nombre" class="form-control" />
+                        <ValidationMessage For="@(() => Vikingo.Nombre)" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Batallas Ganadas</label>
+                        <InputNumber @bind-Value="Vikingo.BatallasGanadas" class="form-control" />
+                        <ValidationMessage For="@(() => Vikingo.BatallasGanadas)" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Arma Favorita</label>
+                        <InputText @bind-Value="Vikingo.ArmaFavorita" class="form-control" />
+                        <ValidationMessage For="@(() => Vikingo.ArmaFavorita)" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Nivel de Honor</label>
+                        <InputSelect @bind-Value="Vikingo.NivelHonor" class="form-select">
+                            @foreach (var nivel in Enum.GetValues(typeof(NivelHonor)))
+                            {
+                                <option value="@nivel">@nivel</option>
+                            }
+                        </InputSelect>
+                        <ValidationMessage For="@(() => Vikingo.NivelHonor)" />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Causa de Muerte Gloriosa</label>
+                        <InputText @bind-Value="Vikingo.CausaMuerteGloriosa" class="form-control" />
+                        <ValidationMessage For="@(() => Vikingo.CausaMuerteGloriosa)" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" @onclick="OnCancel">Cancelar</button>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade show"></div>
+
+@code {
+    [Parameter]
+    public Vikingo Vikingo { get; set; }
+
+    [Parameter]
+    public EventCallback<Vikingo> OnSave { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+} 

@@ -1,0 +1,113 @@
+@page "/"
+@inject VikingosManager VikingosManager
+@inject VikingosState State
+@implements IDisposable
+
+<PageTitle>Gestión de Vikingos para el Valhalla</PageTitle>
+
+<h1>Gestión de Vikingos para el Valhalla</h1>
+
+<div class="row mb-3">
+    <div class="col">
+        <button class="btn btn-primary" @onclick="() => MostrarFormulario(null)">Nuevo Vikingo</button>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(State.MensajeError))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @State.MensajeError
+        <button type="button" class="btn-close" @onclick="() => State.SetError(null)" aria-label="Close"></button>
+    </div>
+}
+
+@if (State.Cargando)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Cargando...</span>
+        </div>
+    </div>
+}
+else if (State.Vikingos.Count == 0)
+{
+    <div class="alert alert-info">
+        No hay vikingos registrados. ¡Agrega uno nuevo!
+    </div>
+}
+else
+{
+    <ListaVikingos Vikingos="State.Vikingos"
+                  OnEdit="MostrarFormulario"
+                  OnDelete="EliminarVikingo" />
+}
+
+@if (_mostrarFormulario)
+{
+    <FormularioVikingo Vikingo="_vikingoSeleccionado"
+                 OnSave="GuardarVikingo"
+                 OnCancel="CerrarFormulario" />
+}
+
+@code {
+    private bool _mostrarFormulario;
+    private Vikingo _vikingoSeleccionado;
+
+    protected override async Task OnInitializedAsync()
+    {
+        State.OnChange += StateHasChanged;
+        await VikingosManager.CargarVikingos();
+    }
+
+    public void Dispose()
+    {
+        State.OnChange -= StateHasChanged;
+    }
+
+    private void MostrarFormulario(Vikingo vikingo)
+    {
+        if (vikingo == null)
+        {
+            _vikingoSeleccionado = new Vikingo();
+        }
+        else
+        {
+            _vikingoSeleccionado = new Vikingo
+                {
+                    Id = vikingo.Id,
+                    Nombre = vikingo.Nombre,
+                    BatallasGanadas = vikingo.BatallasGanadas,
+                    ArmaFavorita = vikingo.ArmaFavorita,
+                    NivelHonor = vikingo.NivelHonor,
+                    CausaMuerteGloriosa = vikingo.CausaMuerteGloriosa,
+                    ValhallaPoints = vikingo.ValhallaPoints,
+                    TipoGuerrero = vikingo.TipoGuerrero
+                };
+        }
+        _mostrarFormulario = true;
+    }
+
+    private void CerrarFormulario()
+    {
+        _mostrarFormulario = false;
+        _vikingoSeleccionado = null;
+    }
+
+    private async Task GuardarVikingo()
+    {
+        if (_vikingoSeleccionado.Id == 0)
+        {
+            await VikingosManager.CrearVikingo(_vikingoSeleccionado);
+        }
+        else
+        {
+            await VikingosManager.ActualizarVikingo(_vikingoSeleccionado.Id, _vikingoSeleccionado);
+        }
+        CerrarFormulario();
+    }
+
+    private async Task EliminarVikingo(int id)
+    {
+        await VikingosManager.EliminarVikingo(id);
+    }
+} 

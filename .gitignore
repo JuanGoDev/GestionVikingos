@@ -1,0 +1,115 @@
+# Archivos y carpetas de Visual Studio
+.vs/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+*.userprefs
+
+# Archivos de compilación
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Archivos de Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Archivos de Rider
+.idea/
+
+# Archivos de configuración con información sensible
+appsettings.json
+appsettings.Development.json
+appsettings.Production.json
+appsettings.Staging.json
+*.Development.json
+*.Production.json
+*.Staging.json
+secrets.json
+*.pfx
+*.key
+*.pem
+
+# Carpetas de dependencias
+node_modules/
+packages/
+wwwroot/lib/
+.nuget/
+
+# Archivos de caché y logs
+*.log
+logs/
+temp/
+.vs/
+*.cache
+*.dll.refresh
+
+# Archivos temporales
+[Tt]emp/
+[Tt]mp/
+*.tmp
+*.swp
+*.*~
+~*
+
+# Archivos de base de datos local
+*.mdf
+*.ldf
+*.ndf
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de respaldo
+*.bak
+*.backup
+*.[Bb]ak
+
+# Archivos de publicación
+*.Publish.xml
+*.pubxml
+*.publishproj
+PublishProfiles/
+
+# Archivos de cobertura de código
+*.coverage
+*.coveragexml
+coverage/
+
+# Archivos específicos de Blazor
+**/wwwroot/service-worker.js
+**/wwwroot/service-worker.published.js
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Archivos de ambiente local
+.env
+.env.local
+.env.*.local
+
+# Archivos de prueba
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+
+# Otros archivos y carpetas
+[Pp]ackages/
+*.nupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
