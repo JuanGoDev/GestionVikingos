@@ -63,11 +63,9 @@ namespace GestionVikingos.API.Services
         private void CalcularValhallaPoints(Vikingo vikingo)
         {
             int puntos = 0;
-            
-            // Puntos por batallas ganadas
-            puntos += vikingo.BatallasGanadas * 10;
 
-            // Puntos por nivel de honor
+            puntos += vikingo.BatallasGanadas * 10;
+            
             puntos += vikingo.NivelHonor switch
             {
                 NivelHonor.Bajo => 50,

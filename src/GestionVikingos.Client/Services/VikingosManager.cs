@@ -1,10 +1,8 @@
-using System;
-using System.Threading.Tasks;
-using GestionVikingos.Client.Models;
-using GestionVikingos.Client.State;
-
 namespace GestionVikingos.Client.Services
 {
+    using GestionVikingos.Client.Models;
+    using GestionVikingos.Client.State;
+
     public class VikingosManager
     {
         private readonly VikingoService _vikingoService;
