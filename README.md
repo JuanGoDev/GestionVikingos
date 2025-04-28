@@ -80,4 +80,4 @@ GestionVikingos/
 - Validación de datos en ambos lados
 
 ## Licencia
-Este proyecto está licenciado bajo la [Licencia MIT](LICENSE). Consulta el archivo [LICENSE](LICENSE) para obtener más detalles.
+Este proyecto está licenciado bajo la [Licencia MIT](LICENSE). Consulta el archivo [LICENSE](LICENSE.md) para obtener más detalles.
